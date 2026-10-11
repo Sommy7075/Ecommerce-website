@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <nav>
+    <a href="{{ url_for('home') }}">Store</a>
+    {% if current_user.is_authenticated %}
+      <span>Hi, {{ current_user.name }}</span>
+    <a href="{{ url_for('orders') }}">Orders</a>
+      <a href="{{ url_for('cart') }}">Cart ({{ cart_count }})</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </nav>
+  {% with messages = get_flashed_messages() %}
+    {% for m in messages %}<p>{{ m }}</p>{% endfor %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</body>
+</html>

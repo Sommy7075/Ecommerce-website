@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Your orders</h1>
+{% for o in orders %}
+<div class="card">
+  <h3>Order #{{ o.id }} <small>{{ o.created_at.strftime("%d %b %Y, %H:%M") }}</small></h3>
+  <ul>
+    {% for i in o["items"] %}
+    <li>{{ i.quantity }} × {{ i.name }} ({{ i.unit_price_cents | money }} each)</li>
+    {% endfor %}
+  </ul>
+  <p class="price">Total: {{ o.total_cents | money }}</p>
+</div>
+{% else %}
+<p>No orders yet.</p>
+{% endfor %}
+{% endblock %}

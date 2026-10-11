@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Store</h1>
+<div class="grid">
+  {% for p in products %}
+  <div class="card">
+    <img src="{{ url_for('static', filename='images/' + p.image) }}" alt="{{ p.name }}">
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.description }}</p>
+    <p class="price">{{ p.price_cents | money }}</p>
+      <form method="post" action="{{ url_for('add_to_cart', product_id=p.id) }}">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <button type="submit">Add to cart</button>
+</form>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

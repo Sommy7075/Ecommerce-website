@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Payment cancelled</h1>
+<p>No charge was made. Your cart is still saved.</p>
+<a href="{{ url_for('cart') }}">Back to cart</a>
+{% endblock %}
